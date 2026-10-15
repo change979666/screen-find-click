@@ -19,11 +19,16 @@ mouse to it, and clicks — plus a small demo flow that automates a browser sear
 ## Run
 
 ```bash
-pip install pyautogui keyboard
+pip install pyautogui keyboard opencv-python
 ```
 
+`opencv-python` is required because `locateCenterOnScreen(..., confidence=0.8)`
+uses OpenCV for fuzzy template matching; without it PyAutoGUI raises on the
+`confidence` argument.
+
 Before running, place your own template images (e.g. `browser_icon.png`,
-`search_box.png`) next to the script, then:
+`search_box.png`) next to the script. They are **not** shipped in this repository —
+capture them from your own screen. Then:
 
 ```bash
 python zidonghua.py
@@ -31,10 +36,14 @@ python zidonghua.py
 
 ## Notes
 
-- Template matching depends on screen resolution and scaling; take the screenshots
-  on the same display you run the script on.
-- This is a demo skeleton — replace `automate_browser_task()` steps with your own
-  target images and actions.
+- Tested on Windows. The `keyboard` library needs root on Linux and has limited
+  macOS support; PyAutoGUI itself works cross-platform.
+- Template matching depends on screen resolution, DPI scaling, and theme; take the
+  screenshots on the same display you run the script on.
+- PyAutoGUI failsafe is on: slam the mouse to the top-left corner to abort.
+- This is a demo skeleton — `automate_browser_task()` won't do anything useful out
+  of the box because the two template images are missing. Replace the steps with
+  your own target images and actions.
 
 ## License & Attribution / 许可与来源
 
